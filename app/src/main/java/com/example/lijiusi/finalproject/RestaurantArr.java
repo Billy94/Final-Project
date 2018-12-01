@@ -1,5 +1,4 @@
 package com.example.lijiusi.finalproject;
 
-public class Edit {
-
+public class RestaurantArr {
 }
