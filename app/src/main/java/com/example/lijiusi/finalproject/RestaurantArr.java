@@ -22,7 +22,33 @@ public class RestaurantArr {
     Restaurant r19 = new Restaurant("South China", 1);
     Restaurant r20 = new Restaurant("Panda Express", 1);
     Restaurant r21 = new Restaurant("Hot Wok Express", 1);
-    private Restaurant[] restaurantPool = {r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21};
+    private Restaurant[] restaurantPool = {r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13,
+            r14, r15, r16, r17, r18, r19, r20, r21};
     private Restaurant[] copyPool;
+
+
+    /**
+     * Return the restaurant recommended & Eliminate that restaurant from copyPool.
+     * @return restaurant recommended
+     */
+    public Restaurant generateRandom() {
+        if (copyPool.length <= 0) {
+            return null;
+        }
+        int randomNum = (int) (Math.random() * copyPool.length);
+        Restaurant toReturn = copyPool[randomNum];
+        Restaurant[] tem = new Restaurant[copyPool.length - 1];
+        for (int i = 0; i < tem.length; i++) {
+            if (i < randomNum) {
+                tem[i] = copyPool[i];
+            } else {
+                tem[i] = copyPool[i + 1];
+            }
+        }
+        copyPool = tem;
+        return toReturn;
+    }
+
+
 
 }
