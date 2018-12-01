@@ -10,4 +10,7 @@ public class Restaurant {
     public int getPrice() {
         return price;
     }
+    public String getName() {
+        return name;
+    }
 }
