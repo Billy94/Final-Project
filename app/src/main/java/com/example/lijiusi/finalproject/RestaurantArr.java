@@ -1,7 +1,7 @@
 package com.example.lijiusi.finalproject;
 
 public class RestaurantArr {
-    private Restaurant[] restaurantPool;
+    private Restaurant[] restaurantPool = {r1};
     private Restaurant[] copyPool;
     Restaurant r1 = new Restaurant("Hot Pot Lab", 3);
     Restaurant r2 = new Restaurant("Shiquan", 2);
