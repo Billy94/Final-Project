@@ -13,12 +13,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView test = findViewById(R.id.test);
-        Button semester1 = findViewById(R.id.semester1);
-        semester1.setOnClickListener(new View.OnClickListener() {
+        final TextView restaurantTextView = findViewById(R.id.restaurantTextView);
+        Button randomBotton = findViewById(R.id.randomBotton);
+        randomBotton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                restaurantTextView.setText(RestaurantArr.generateRandom().getName());
             }
         });
     }
