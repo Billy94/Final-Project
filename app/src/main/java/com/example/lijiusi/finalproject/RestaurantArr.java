@@ -29,6 +29,8 @@ public class RestaurantArr {
             r14, r15, r16, r17, r18, r19, r20, r21};
     private static Restaurant[] copyPool = {r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13,
             r14, r15, r16, r17, r18, r19, r20, r21};
+    private static int date = 0;
+    private final int DAYS_IN_A_WEEK = 7;
 
 
     /**
@@ -53,5 +55,20 @@ public class RestaurantArr {
         return toReturn;
     }
 
+    /**
+     * refresh the copyPool if the new week started.
+     * @param newDate the date of when click.
+     */
+    public void refresh(int newDate) {
+        int olD = date / DAYS_IN_A_WEEK;
+        int neW = newDate / DAYS_IN_A_WEEK;
+        if(olD != neW) {
+            Restaurant[] a = {r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13,
+                    r14, r15, r16, r17, r18, r19, r20, r21};
+            copyPool = a;
+        }
+        date = newDate;
+    }
 
 }
+

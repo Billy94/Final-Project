@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         randomBotton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 restaurantTextView.setText(RestaurantArr.generateRandom().getName());
             }
         });
