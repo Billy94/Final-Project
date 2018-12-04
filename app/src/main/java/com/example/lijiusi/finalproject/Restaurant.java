@@ -1,9 +1,12 @@
 package com.example.lijiusi.finalproject;
+import com.yelp.fusion.client.connection.YelpFusionApi;
+import com.yelp.fusion.client.connection.YelpFusionApiFactory;
+import java.io.*;
 
 public class Restaurant {
     private int price;
     private String name;
-    public Restaurant(final String setName, final int setPrice) {
+    Restaurant(final String setName, final int setPrice) {
         price = setPrice;
         name = setName;
     }
