@@ -36,6 +36,7 @@ import static com.android.volley.Request.*;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "final project";
     private static RequestQueue requestQueue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     /*
     void yelpAPICall() {
         try {
@@ -135,54 +137,17 @@ public class MainActivity extends AppCompatActivity {
     void processResponse(final JSONObject response) {
         try {
             TextView restaurantTextView = findViewById(R.id.restaurantTextView);
-            restaurantTextView.setText(response.getString("display_phone"));
-            /*
-            if (response.getBoolean("hours[x].is_open_now")) {
+            //restaurantTextView.setText(response.getJSONArray("hours").getJSONObject(0).getString("hours_type"));
+
+            if (response.getJSONArray("hours").getJSONObject(0).getBoolean("is_open_now")) {
                 restaurantTextView.setText("It's opening!!");
             } else {
                 restaurantTextView.setText("It's closed.");
             }
-            */
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-/*
-    void startAPICall() {
-        try {
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                    Request.Method.GET,
-
-                    //We need to set the id afterwards.
-                    "https://api.yelp.com/v3/businesses/{id}",
-                    null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(final JSONObject response) {
-                            Log.d(TAG, response.toString());
-                            processResponse(response);
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(final VolleyError error) {
-                    Log.w(TAG, error.toString());
-                }
-            });
-            requestQueue.add(jsonObjectRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    void processResponse(final JSONObject response) {
-        try {
-            response.getString("is_closed");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    */
 }
