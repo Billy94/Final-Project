@@ -1,19 +1,22 @@
 package com.example.lijiusi.finalproject;
-import com.yelp.fusion.client.connection.YelpFusionApi;
-import com.yelp.fusion.client.connection.YelpFusionApiFactory;
-import java.io.*;
+
 
 public class Restaurant {
     private int price;
     private String name;
-    Restaurant(final String setName, final int setPrice) {
+    private String alias;
+    Restaurant(final String setName, final int setPrice, final String setAlias) {
         price = setPrice;
         name = setName;
+        alias = setAlias;
     }
     public int getPrice() {
         return price;
     }
     public String getName() {
         return name;
+    }
+    public String getUrl() {
+        return "https://api.yelp.com/v3/businesses/" + alias;
     }
 }

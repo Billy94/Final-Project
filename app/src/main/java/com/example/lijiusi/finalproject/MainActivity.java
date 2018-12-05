@@ -1,5 +1,6 @@
 package com.example.lijiusi.finalproject;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "https://api.yelp.com/v3/businesses/WavvLdfdP6g8aZTtbBQHTw",
+                    RestaurantArr.generateRandom().getUrl(),
                     null,
                     new com.android.volley.Response.Listener<JSONObject>() {
                         @Override
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             }) {
                 public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<String, String>();
-                    params.put("Bearer", "XY3qKK8bXCSqfj5Fgzzac1JHIpTkGXySsYI5TIJyefWseq6lBhEyq7v0PFH9gTfpNHmSrLzxYtjFZjFVex4xx7ShYpLc3TZ6rSy_SNaoUngTs2Af0y8BKjfkyI0FXHYx");
+                    params.put("Authorization", "Bearer XY3qKK8bXCSqfj5Fgzzac1JHIpTkGXySsYI5TIJyefWseq6lBhEyq7v0PFH9gTfpNHmSrLzxYtjFZjFVex4xx7ShYpLc3TZ6rSy_SNaoUngTs2Af0y8BKjfkyI0FXHYx");
                     Log.d(TAG, params.toString());
                     return params;
                 }
@@ -130,10 +131,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     void processResponse(final JSONObject response) {
         try {
             TextView restaurantTextView = findViewById(R.id.restaurantTextView);
-            restaurantTextView.setText(response.getString("name"));
+            restaurantTextView.setText(response.getString("display_phone"));
+            /*
+            if (response.getBoolean("hours[x].is_open_now")) {
+                restaurantTextView.setText("It's opening!!");
+            } else {
+                restaurantTextView.setText("It's closed.");
+            }
+            */
+
         } catch (Exception e) {
             e.printStackTrace();
         }
