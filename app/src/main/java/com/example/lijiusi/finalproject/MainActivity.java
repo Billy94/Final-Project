@@ -48,8 +48,9 @@ public class MainActivity extends AppCompatActivity {
         randomBotton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Restaurant a = RestaurantArr.generateRandom();
 
-                startAPICall();
+                startAPICall(a);
                 //restaurantTextView.setText(RestaurantArr.generateRandom().getName());
             }
         });
@@ -102,17 +103,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     */
-    void startAPICall() {
+    void startAPICall(final Restaurant a) {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    RestaurantArr.generateRandom().getUrl(),
+                    a.getUrl(),
                     null,
                     new com.android.volley.Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(final JSONObject response) {
                             Log.d(TAG, response.toString());
-                            processResponse(response);
+                            processResponse(response, a);
                         }
                     }, new com.android.volley.Response.ErrorListener() {
                 @Override
@@ -134,15 +135,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    void processResponse(final JSONObject response) {
+    void processResponse(final JSONObject response, final Restaurant a) {
         try {
             TextView restaurantTextView = findViewById(R.id.restaurantTextView);
             //restaurantTextView.setText(response.getJSONArray("hours").getJSONObject(0).getString("hours_type"));
 
             if (response.getJSONArray("hours").getJSONObject(0).getBoolean("is_open_now")) {
-                restaurantTextView.setText("It's opening!!");
+                restaurantTextView.setText(a.getName() + "!" + "\n" +
+                        "AND!  It's open!!!.  It's gonna cost you " + a.getPrice() + "$");
             } else {
-                restaurantTextView.setText("It's closed.");
+                restaurantTextView.setText(a.getName() + "!" + "\n" + "AND!  It's closed.");
             }
 
 
