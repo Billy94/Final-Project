@@ -2,6 +2,8 @@ package com.example.lijiusi.finalproject;
 import com.yelp.fusion.client.connection.YelpFusionApi;
 import com.yelp.fusion.client.connection.YelpFusionApiFactory;
 import java.io.*;
+import java.util.Calendar;
+
 //十全和周树人在yelp上没有，我随便用了一个empire Chinese restaurant代替了。。。
 public class RestaurantArr {
     private static Restaurant r1 = new Restaurant("Hot Pot Lab", 3, "hot-pot-lab-champaign");
@@ -30,7 +32,7 @@ public class RestaurantArr {
     private static Restaurant[] copyPool = {r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13,
             r14, r15, r16, r17, r18, r19, r20, r21};
     private static int date = 0;
-    private final int DAYS_IN_A_WEEK = 7;
+    private final static int DAYS_IN_A_WEEK = 7;
 
 
     /**
@@ -59,7 +61,7 @@ public class RestaurantArr {
      * refresh the copyPool if the new week started.
      * @param newDate the date of when click.
      */
-    public void refresh(int newDate) {
+    public static void refresh(int newDate) {
         int olD = date / DAYS_IN_A_WEEK;
         int neW = newDate / DAYS_IN_A_WEEK;
         if(olD != neW) {
@@ -69,6 +71,12 @@ public class RestaurantArr {
         }
         date = newDate;
     }
+
+    /**
+     * date.
+     */
+    static Calendar calendar = Calendar.getInstance();
+    public static int todayDate = calendar.get(Calendar.DATE);
 
 }
 

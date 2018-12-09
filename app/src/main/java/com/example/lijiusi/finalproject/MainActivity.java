@@ -43,66 +43,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         requestQueue = Volley.newRequestQueue(this);
 
-        final TextView restaurantTextView = findViewById(R.id.restaurantTextView);
         Button randomBotton = findViewById(R.id.randomBotton);
         randomBotton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RestaurantArr.refresh(RestaurantArr.todayDate);
                 Restaurant a = RestaurantArr.generateRandom();
-
                 startAPICall(a);
-                //restaurantTextView.setText(RestaurantArr.generateRandom().getName());
             }
         });
     }
 
-    /*
-    void yelpAPICall() {
-        try {
-            YelpFusionApiFactory apiFactory = new YelpFusionApiFactory();
-            YelpFusionApi yelpFusionApi = apiFactory.createAPI("XY3qKK8bXCSqfj5Fgzzac1JHIpTkGXySsYI5TIJyefWseq6lBhEyq7v0PFH9gTfpNHmSrLzxYtjFZjFVex4xx7ShYpLc3TZ6rSy_SNaoUngTs2Af0y8BKjfkyI0FXHYx");
-
-            Callback<Business> callback = new Callback<Business>() {
-                @Override
-                public void onResponse(@NonNull Call<Business> call, Response<Business> response) {
-                    Business business = response.body();
-                    // Update UI text with the Business object.
-                    TextView restaurantTextView = findViewById(R.id.restaurantTextView);
-                    assert business != null;
-                    if (business.getName() == null) {
-                        restaurantTextView.setText(getString(R.string.temp));
-                    } else {
-                        restaurantTextView.setText(business.getName());
-                    }
-                }
-                @Override
-                public void onFailure(@NonNull Call<Business> call, @NonNull Throwable t) {
-                    // HTTP error happened, do something to handle it.
-                }
-            };
-            Call<Business> call = yelpFusionApi.getBusiness("WavvLdfdP6g8aZTtbBQHTw");
-            call.enqueue(callback);
-            if (isOnDestroyCalled) {
-                call.cancel();
-            }
-        } catch(IOException ie) {
-            ie.printStackTrace();
-        }
-
-    }
-    private volatile boolean isOnDestroyCalled = false;
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        isOnDestroyCalled = true;
-    }
-
-    public boolean isOnDestroyCalled() {
-        return this.isOnDestroyCalled;
-    }
-
-    */
     void startAPICall(final Restaurant a) {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -141,10 +92,11 @@ public class MainActivity extends AppCompatActivity {
             //restaurantTextView.setText(response.getJSONArray("hours").getJSONObject(0).getString("hours_type"));
 
             if (response.getJSONArray("hours").getJSONObject(0).getBoolean("is_open_now")) {
-                restaurantTextView.setText(a.getName() + "!" + "\n" +
-                        "AND!  It's open!!!.  It's gonna cost you " + a.getPrice() + "$");
+                restaurantTextView.setText(a.getName() + "!" + "\n" + "\n" +
+                        "AND!  It's open!!!" + "\n" +
+                        "It's gonna cost you " + a.getPrice() + "$");
             } else {
-                restaurantTextView.setText(a.getName() + "!" + "\n" + "AND!  It's closed.");
+                restaurantTextView.setText(a.getName() + "!" + "\n" + "\n" + "AND!  It's closed.");
             }
 
 
